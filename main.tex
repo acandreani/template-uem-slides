@@ -1,3 +1,6 @@
+%gambiarra pra superar bug no acroread e uniformizar cor 
+\pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>} % quebra no writelatex, comente se for usar no writelatex
+
 \documentclass[aspectratio=54]{beamer}
 
 %
@@ -33,6 +36,11 @@
 \usepackage{hyperref}
 \usepackage[brazil]{babel}
 \usepackage[utf8x]{inputenc}
+\usepackage{etoolbox}
+
+%comm
+\newbool{MODE_DEV}
+%\booltrue{MODE_DEV} % descomente essa linha para compilar uma versao de desenvolvimento e dessa maneira compila mais rápido. 
 
 
 \hypersetup{
@@ -54,7 +62,7 @@
 \let\oldcitet=\citet
 \renewcommand\citet[1]{\hypersetup{linkcolor=gray}\hyperlink{#1}{\oldcitet{#1}}} 
 
-\logo{\includegraphics[width=1.6cm,height=1.4cm]{img/uem2.pdf}}
+\ifbool{MODE_DEV}{}{\logo{\includegraphics[width=1.6cm,height=1.4cm]{img/uem2.pdf}}}
 % --- Informações do documento ---
 
 \title{Experimento x\\
