@@ -1,8 +1,20 @@
 %gambiarra pra superar bug no acroread e uniformizar cor 
 \pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>} % quebra no writelatex, comente se for usar no writelatex
+\pdfobjcompresslevel=0 % Adobe Reader X/XI compatibilty
 
+
+%\def\modeprint{}
+%\def\modedev{}
+ 
+\ifdefined\modeprint
+\documentclass[aspectratio=54,handout]{beamer}
+\else
 \documentclass[aspectratio=54]{beamer}
-
+\fi
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
 %
 % Choose how your presentation looks.
 %
@@ -16,59 +28,148 @@
 	\usecolortheme{default}
 	\usefonttheme[onlymath]{serif}	
  
- \setbeamercolor{normal text}{fg=black}
+\definecolor{uemgreen}{HTML}{255943}
+\definecolor{uemlightgreen}{HTML}{417D58}
+ 
+
+ \setbeamercolor{frametitle}{bg=uemgreen}     %controls the color of the headline
+     %controls the color of the sidebar
+\setbeamercolor{logo}{bg=uemgreen}
+\setbeamercolor{normal text}{fg=black}
 \setbeamercolor{alerted text}{fg=black}
-\setbeamercolor{author}{fg=blue}
-\setbeamercolor{institute}{fg=blue}
-\setbeamercolor{date}{fg=green}
+\setbeamercolor{author}{fg=black}
+\setbeamercolor{institute}{fg=black}
+\setbeamercolor{date}{fg=darkgray}
 \setbeamercolor{frametitle}{fg=white}
 \setbeamercolor{framesubtitle}{fg=brown}
-\setbeamercolor{block title}{bg=blue, fg=white}		%Cor do título
-\setbeamercolor{block body}{bg=gray, fg=darkgray}	%Cor do texto (bg= fundo; fg=texto)
+\setbeamercolor{block title}{bg=uemgreen, fg=white}		%Cor do título
+\setbeamercolor{block body}{bg=white, fg=black}	%Cor do texto (bg= fundo; fg=texto)
+
 %  \setbeamertemplate{navigation symbols}{}
 %  \setbeamertemplate{caption}[numbered]
+
+
+\definecolor{lightgray}{HTML}{E8E6E5}
+\definecolor{beamer@blendedblue}{rgb}{0.5,0.5,0.3} % changed this
+
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=green!50!black}
+
+\setbeamercolor{structure}{fg=uemgreen}
+
+\setbeamercolor{background canvas}{parent=normal text}
+\setbeamercolor{background}{parent=background canvas}
+
+\setbeamercolor{palette primary}{fg=white,bg=uemgreen} % changed this
+\setbeamercolor{palette secondary}{use=structure,fg=structure.fg!100!green} % changed this
+\setbeamercolor{palette tertiary}{use=structure,fg=structure.fg!100!green} % changed this
+
+%
+\usebeamercolor{structure} 
+\setbeamertemplate{sidebar canvas left}[vertical shading][top=uemgreen,bottom=uemlightgreen!75]
+
+ 
+\definecolor{secinhead}{RGB}{249,196,95}
+\definecolor{shadowbg}{RGB}{51,51,51}
+
+\setbeamercolor{secsubsec}{fg=secinhead,bg=black}
+\setbeamercolor{shadow}{fg=secinhead,bg=shadowbg}
+
+\setbeamerfont{frametitle}{series=\bfseries} 
+
+
+\setbeamertemplate{headline}
+{  
+	 
+	 \hbox{%
+	 	
+		\tikz\draw[draw=none,top color=uemlightgreen!78,bottom color=uemgreen] (0,0) rectangle (\paperwidth,1.4);\hspace*{-1.0\paperwidth}\includegraphics[width=1.6cm,height=1.4cm]{img/uem2.png}
+		
+	}%
 }
 
-\usepackage{textpos} 
+ \setbeamercolor{sidebar}{bg=green, fg=black}
+
+}
+
+%\usepackage{textpos} 
 \usepackage{etoolbox}
+\usepackage{ragged2e}
+\usepackage{bm}
 \usepackage{fancybox}
-\usepackage[comma,numbers,sort&compress]{natbib}
+\usepackage[tikz]{bclogo}
+\usepackage[alf,abnt-etal-cite=2]{abntex2cite}           % Citações padrão ABNT
+
+
 \usepackage{hyperref}
 \usepackage[brazil]{babel}
-\usepackage[utf8x]{inputenc}
-\usepackage{etoolbox}
 
-%comm
+%\usepackage[alf]{abntex2cite}  
+%\usepackage{pdfpages}
+%
+%\def\getpdfpages#1#2{\begingroup
+%  \setbeamercolor{background canvas}{bg=}
+%  \includepdf[pages={#1},%
+%  pagecommand={\global\setcounter{framenumber}{\value{page}}%
+%    \expandafter\def\expandafter\insertshorttitle\expandafter{%
+%      \insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}}%
+%  ]{#2}
+%  \endgroup}
+%  
+%\getpdfpages{{1,5,7,10,12}}{main.pdf}
+
+\usepackage{calligra}
+ \newcommand{\setfont}[2]{{\fontfamily{#1}\selectfont #2}}
+ 
+\usepackage{tcolorbox}
+
+
+%#---
+\usepackage{pkg/shadowbox}
+
+%#--
+
+
+\definecolor{attention}{HTML}{E00000}
+
+\newtcbox{\myovalbox}{colback=attention,boxrule=0pt,arc=5pt,
+  boxsep=0pt,left=3pt,right=3pt,top=3pt,bottom=3pt}
+
+\usepackage{xspace}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
 \newbool{MODE_DEV}
-%\booltrue{MODE_DEV} % descomente essa linha para compilar uma versao de desenvolvimento e dessa maneira compila mais rápido. 
-
+ % descomente essa linha para compilar uma versao de desenvolvimento e dessa maneira compila mais rápido.
+\ifdefined\modedev
+\booltrue{MODE_DEV}
+\else
+\fi
+ 
 
 \hypersetup{
     colorlinks=true,
-    citecolor=green,
-    linkcolor=red,
+    citecolor=blue,
+    linkcolor=black,
     backref=true
 }
 \everymath{\color{blue}}
-\let\oldbibitem=\bibitem
-\renewcommand{\bibitem}[2][]{\label{#2}\oldbibitem[#1]{#2}}
-\let\oldcite=\cite
-\renewcommand\cite[1]{\hypersetup{linkcolor=gray} \hyperlink{#1}{\oldcite{#1}}}
-\let\oldcitep=\citep
-\renewcommand\citep[1]{\hypersetup{linkcolor=gray}\hyperlink{#1}{\oldcitep{#1}}}
-%\let\oldciteauthor=\citeauthor
-%\renewcommand\citeauthor[1]{\hypersetup{linkcolor=green}\hyperlink{#1}{\oldciteauthor{#1}}} 
-%
-\let\oldcitet=\citet
-\renewcommand\citet[1]{\hypersetup{linkcolor=gray}\hyperlink{#1}{\oldcitet{#1}}} 
+ 
+\newcommand{\atributo}[1]{\textbf{\textit{#1}}}
 
-\ifbool{MODE_DEV}{}{\logo{\includegraphics[width=1.6cm,height=1.4cm]{img/uem2.pdf}}}
+
+\newcommand{\twocol}[2]{#1 & #2 \\ \hline}
+
+
 % --- Informações do documento ---
 
 \title{Experimento x\\
 \small }
 
- 
+  \ifbool{MODE_DEV}{}{\logo{\includegraphics[width=1.6cm,height=1.4cm]{img/uem2.png}}}
 \author[]{
 Tiririca\\%
 Einsten da silva \\
@@ -76,33 +177,41 @@ José Cristo\\
 Compadre Washington  \\%- RA:PG47547}
 }
 \institute{
-Prof.\textordfeminine Edson \\
+Prof.\textordfeminine Obama \\
 Mestrado em Ciência da Computação \\
 Departamento de Informática}
-\date{\today, v-0.3} 
+\date{\today} 
 
 \makeatletter
 \setlength{\beamer@headheight}{1.4cm}
   \setbeamertemplate{sidebar \beamer@sidebarside}%{sidebar theme}
   {
-  
+   \fontfamily{\sfdefault} \bfseries \selectfont  
     \beamer@tempdim=\beamer@sidebarwidth%
     \advance\beamer@tempdim by -6pt%
     \insertverticalnavigation{\beamer@sidebarwidth}%
     \vfill
     \ifx\beamer@sidebarside\beamer@lefttext%
+    \usebeamercolor{normal text}%
+    \fontfamily{\mddefault}  \selectfont  
+    \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+    \vskip2pt%
     \else%
       \usebeamercolor{normal text}%
+      \fontfamily{\mddefault} \bfseries \selectfont  
       \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
       \vskip2pt%
     \fi%
 }%
 \newcommand{\argmax}[1]{\underset{#1}{\arg\max}\;}
 \makeatother
+
+\input{text/newcommands}
+
 \begin{document}
 
 \begin{frame} 
-	\frametitle{ \fontsize{20pt}{11pt} \selectfont Universidade Estadual de Maringá}
+	\frametitle{\parbox{1.03\linewidth}{\centering{\fontsize{17pt}{10pt}\selectfont Universidade Estadual de Maringá}}}
 									 
 									
 	\titlepage
@@ -121,10 +230,10 @@ Departamento de Informática}
 %  \tableofcontents
 %\end{frame}
 
-\input{txt/part1}
-\input{txt/part2}
-\input{txt/part3}
-\input{txt/part4}
+\input{text/part1}
+\input{text/part2}
+\input{text/part3}
+\input{text/part4}
 
 
 
@@ -139,16 +248,26 @@ Departamento de Informática}
 
 \subsection{Agradecimento}
 \begin{frame}{Agradecimento}
-	\begin{figure}
-		\centering
-		\includegraphics[width=7cm,keepaspectratio=true]{img/hand.jpg}
-	\end{figure}
+	
+	\begin{center}
+	 \centering
+	 
+	% \setfont{calligra}{Obrigado} 
+	\hspace*{-1cm}\scalebox{3}{
+	{\Huge\textcalligra{Obrigado}}}
+	\end{center}
+	\centering
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=7cm,keepaspectratio=true]{img/hand.jpg}
+%	\end{figure}
+
 \end{frame}
 
 
 \begin{frame}[allowframebreaks]{Referências}
-	\bibliographystyle{abbrvnat}
-	\bibliography{referencias}
+%	\bibliographystyle{abbrvnat}
+	\bibliography{text/references}
 \end{frame}
 
 \end{document}
