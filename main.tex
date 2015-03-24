@@ -83,11 +83,25 @@
 \setbeamertemplate{headline}
 {  
 	 
-	 \hbox{%	 	
-		\tikz\draw[draw=none,top color=uemlightgreen!78,bottom color=uemgreen] (0,0) rectangle (\paperwidth,1.4);
-		\ifbool{MODE_DEV}{}{\hspace*{-1.01\paperwidth}\includegraphics[width=1.6cm,height=1.4cm]{img/uem2.png}}
-		
+	 \hbox{%
+	 	
+		\tikz\draw[draw=none,top color=uemlightgreen!78,bottom color=uemgreen] (0,0) rectangle (\paperwidth,1.48);
 	}%
+	
+	\ifbool{MODE_DEV}{}{
+		\vspace*{-1.44cm}\hspace*{-0.1cm}
+	\hbox{\includegraphics[width=1.6cm,height=1.4cm]{img/uem2.png}}}
+	
+ \vspace*{-0.03cm}
+	 \hbox{%
+	 	\tikz\draw[draw=none,top color=white,bottom color=white] (0,0) rectangle (\paperwidth,0.05);
+	 }%
+	  
+	 \vspace*{-0.04cm}
+	 \hbox{%
+	 	\tikz\draw[draw=none,top color=red!100,bottom color=red!100] (0,0) rectangle (\paperwidth,0.02);
+	 }%
+	
 }
 
  \setbeamercolor{sidebar}{bg=uemlightergreen, fg=black}
