@@ -15,6 +15,8 @@
 \usepackage{lmodern}
 \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 \usepackage[T1]{fontenc}
+\usepackage{tikz}
+ 
 %
 % Choose how your presentation looks.
 %
@@ -42,7 +44,7 @@
 \setbeamercolor{institute}{fg=black}
 \setbeamercolor{date}{fg=darkgray}
 \setbeamercolor{frametitle}{fg=white}
-\setbeamercolor{framesubtitle}{fg=brown}
+\setbeamercolor{framesubtitle}{fg=white}
 \setbeamercolor{block title}{bg=uemgreen, fg=white}		%Cor do título
 \setbeamercolor{block body}{bg=white, fg=black}	%Cor do texto (bg= fundo; fg=texto)
 
@@ -77,7 +79,29 @@
 \setbeamercolor{secsubsec}{fg=secinhead,bg=black}
 \setbeamercolor{shadow}{fg=secinhead,bg=shadowbg}
 
-\setbeamerfont{frametitle}{series=\bfseries} 
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{section in sidebar}{series=\bfseries, size=\tiny}
+\setbeamerfont{subsection in sidebar}{size=\tiny}
+
+%\setbeamertemplate{section in sidebar}{series=\bfseries, size=\tiny}
+ 
+ 
+ \setbeamertemplate{section in sidebar}{\tikz{\node[text width=1.43cm, fill=uemgreen,text=white]{
+ 			\begin{minipage}[t]{1.35cm}
+ 				\raggedright
+ 				\tiny \bfseries \selectfont \insertsectionhead 
+ 			\end{minipage}
+ 		};}}
+ 
+\setbeamertemplate{subsection in sidebar}{\tikz{\node[text width=1.43cm, fill=uemgreen,text=white]{
+			\hspace*{0.02cm}
+			\begin{minipage}[t]{1.35cm}
+				\raggedright
+			 \tiny \selectfont \insertsubsectionhead 
+			\end{minipage}
+			};}}
+ 
+ 
 
 
 \setbeamertemplate{headline}
@@ -100,7 +124,8 @@
 	 \vspace*{-0.03cm}
 	 \hbox{%
 	 	\tikz\draw[draw=none,top color=red!100,bottom color=red!100] (0,0) rectangle (\paperwidth,0.02);
-	 }%
+	 }
+	 
 	
 }
 
@@ -183,27 +208,19 @@
 \date{\today} 
 
 \makeatletter
-\setlength{\beamer@headheight}{1.4cm}
-  \setbeamertemplate{sidebar \beamer@sidebarside}%{sidebar theme}
-  {
-   \fontfamily{\sfdefault} \bfseries \selectfont  
-    \beamer@tempdim=\beamer@sidebarwidth%
-    \advance\beamer@tempdim by -6pt%
-    \insertverticalnavigation{\beamer@sidebarwidth}%
-    \vfill
-    \ifx\beamer@sidebarside\beamer@lefttext%
-    \usebeamercolor{normal text}%
-    \fontfamily{\mddefault}  \selectfont  
-    \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
-    \vskip2pt%
-    \else%
-      \usebeamercolor{normal text}%
-      \fontfamily{\mddefault} \bfseries \selectfont  
-      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
-      \vskip2pt%
-    \fi%
+\setbeamertemplate{sidebar \beamer@sidebarside}%{sidebar theme}
+{
+	\beamer@tempdim=\beamer@sidebarwidth%
+	\advance\beamer@tempdim by -6pt%
+	\insertverticalnavigation{\beamer@sidebarwidth}%
+	\vfill
+	\ifx\beamer@sidebarside\beamer@lefttext%
+	\else%
+	\usebeamercolor{normal text}%
+	\llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+	\vskip2pt%
+	\fi%
 }%
-\newcommand{\argmax}[1]{\underset{#1}{\arg\max}\;}
 \makeatother
 
 \input{text/newcommands}
