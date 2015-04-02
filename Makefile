@@ -31,6 +31,9 @@ full:
 #	ln -sf ../din $(tempfilespath)/din
 
 	cd $(tempfilespath);bibtex "main.aux"
+	sed -i 's/\\\\#/\\#/g' $(tempfilespath)/main.bbl
+	sed -i 's/\\\\%/\\%/g' $(tempfilespath)/main.bbl
+	sed -i 's/\\\\_/\\_/g' $(tempfilespath)/main.bbl
 	pdflatex $(tempfilescmd)  --jobname=main -interaction=nonstopmode "$(def)\input{main.tex}"
 #	cd $(tempfilespath);makeglossaries main	
 #	pdflatex $(tempfilescmd) -synctex=1 -interaction=nonstopmode main.tex
