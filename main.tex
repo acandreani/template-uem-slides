@@ -225,4 +225,25 @@
 
 \input{text/newcommands}
 
+\usepackage{enumitem}
+%compatibilidade entre beamer e enumitem
+\setitemize{label=\usebeamerfont*{itemize item}%
+	\usebeamercolor[fg]{itemize item}
+	\usebeamertemplate{itemize item}}
+
+
+ \makeatletter
+ 
+ \setbeamertemplate{footline}
+ {
+ 	\leavevmode%
+ 	\hbox{
+\hspace*{.935\paperwidth}  \begin{beamercolorbox}[wd=0.6cm,ht=2.25ex,dp=1ex,right]{section in foot}%
+ 		  \color{uemgreen} \fontfamily{\rmdefault}\bfseries \selectfont \insertframenumber
+ 		\end{beamercolorbox}}%
+ 		\vskip0pt%
+ 	}
+ 	\makeatother
+ 	\setbeamercolor{footline}{bg=white}
+\beamertemplatenavigationsymbolsempty 
 \input{text/document}
