@@ -1,11 +1,11 @@
-#Template para apresentações no mestrado em Ciência da Computação - UEM . 
+# Template para apresentações no mestrado em Ciência da Computação - UEM . 
 
 Esta template é customização do tema PaloAlto do Beamer
 
-#Operações mais usadas
+# Operações mais usadas
 
 
-##Começar, ou seja, clonar o projeto pro seu computador:
+## Começar, ou seja, clonar o projeto pro seu computador:
 
 git clone https://alexandrecandreani@bitbucket.org/alexandrecandreani/template-uem-slides.git
 
