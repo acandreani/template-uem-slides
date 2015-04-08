@@ -16,7 +16,8 @@
 \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
- 
+
+\usepackage{appendixnumberbeamer} 
 %
 % Choose how your presentation looks.
 %
@@ -239,7 +240,7 @@
  	\leavevmode%
  	\hbox{
 \hspace*{.935\paperwidth}  \begin{beamercolorbox}[wd=0.6cm,ht=2.25ex,dp=1ex,right]{section in foot}%
- 		  \color{uemgreen} \fontfamily{\rmdefault}\bfseries \selectfont \insertframenumber
+ 		  \color{uemgreen} \fontfamily{\rmdefault}\bfseries \selectfont \insertframenumber/\inserttotalframenumber
  		\end{beamercolorbox}}%
  		\vskip0pt%
  	}
